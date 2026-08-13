@@ -2,7 +2,7 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>福岡 6 天 5 夜自由行</title>
 
     <!-- 社群分享 (LINE/FB) 卡片預覽設定 -->
@@ -11,260 +11,297 @@
     <meta property="og:type" content="website" />
 
     <style>
+        /* 日系無印風格 (MUJI Style) 色彩變數 */
         :root {
-            --primary-color: #3a6b88;
-            --bg-color: #f4f7f6;
-            --card-bg: #ffffff;
-            --text-color: #333333;
-            --accent-food: #e67e22;
-            --accent-spot: #27ae60;
-            --accent-shop: #8e44ad;
-            --accent-cafe: #d35400;
-            --accent-hotel: #2980b9;
-            --accent-flight: #c0392b;
-            --accent-prep: #2c3e50;
-            --map-btn-bg: #4285F4;
+            --bg-color: #F9F8F6;           /* 暖沙米白背景 */
+            --card-bg: #FFFFFF;             /* 純白卡片底色 */
+            --primary-color: #7D6B5D;       /* 亞麻暖棕主色 */
+            --text-main: #3D3B38;           /* 炭灰木色文字 */
+            --text-sub: #8C8681;            /* 柔灰次要文字 */
+            --border-color: #E8E4DD;       /* 淡大地色極細邊框 */
+            
+            /* 低彩度自然色系標籤 */
+            --badge-prep: #6B7A82;          /* 灰藍 */
+            --badge-flight: #A85A52;        /* 磚紅 */
+            --badge-food: #C28544;          /* 焦糖棕 */
+            --badge-spot: #6B8E68;          /* 鼠尾草綠 */
+            --badge-shop: #8B728E;          /* 灰紫 */
+            --badge-cafe: #B07B57;          /* 木質橘 */
+            --badge-hotel: #5A7E91;         /* 莫蘭迪藍 */
+            --badge-memo: #948E88;          /* 暖灰色 */
+
+            --btn-bg: #7D6B5D;
+            --btn-text: #FFFFFF;
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "PingFang TC", "Microsoft JhengHei", sans-serif;
             background-color: var(--bg-color);
-            color: var(--text-color);
+            color: var(--text-main);
             margin: 0;
             padding: 0;
-            line-height: 1.6;
+            line-height: 1.65;
+            letter-spacing: 0.02em;
         }
 
+        /* 頁首 Header */
         header {
-            background: linear-gradient(135deg, #3a6b88, #5a93b5);
-            color: white;
+            background-color: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
             text-align: center;
-            padding: 20px 16px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 24px 16px 18px 16px;
         }
 
-        header h1 { margin: 0; font-size: 1.6rem; }
-        header p { margin: 6px 0 0 0; opacity: 0.9; font-size: 0.9rem; }
+        header h1 {
+            margin: 0;
+            font-size: 1.35rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        header p {
+            margin: 6px 0 0 0;
+            color: var(--text-sub);
+            font-size: 0.85rem;
+        }
 
         .container {
-            max-width: 600px;
+            max-width: 480px; /* 針對手機螢幕最佳化寬度 */
             margin: 0 auto;
-            padding: 12px;
+            padding: 12px 14px 30px 14px;
         }
 
+        /* Visit Japan Web 簡約 Banner */
+        .vjw-banner {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .vjw-banner strong {
+            font-size: 0.95rem;
+            color: var(--text-main);
+            display: block;
+        }
+
+        .vjw-banner span {
+            font-size: 0.78rem;
+            color: var(--text-sub);
+        }
+
+        .vjw-link-btn {
+            background-color: var(--primary-color);
+            color: var(--btn-text) !important;
+            font-size: 0.78rem;
+            padding: 6px 14px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        /* 資訊卡片（航班與住宿） */
         .info-card {
-            background: #ffffff;
-            border-radius: 12px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
             padding: 14px;
-            margin-bottom: 16px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-            border-left: 5px solid var(--primary-color);
+            margin-bottom: 14px;
         }
 
         .info-card h3 {
             margin: 0 0 10px 0;
-            font-size: 1.05rem;
+            font-size: 0.95rem;
+            font-weight: 600;
             color: var(--primary-color);
             display: flex;
             align-items: center;
             gap: 6px;
         }
 
-        .vjw-banner {
-            background: linear-gradient(135deg, #27ae60, #2ecc71);
-            color: white;
-            padding: 12px 16px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 16px;
-            box-shadow: 0 2px 6px rgba(39, 174, 96, 0.3);
-        }
-
-        .vjw-banner strong { font-size: 1rem; }
-        .vjw-banner span { font-size: 0.8rem; opacity: 0.9; display: block; }
-
-        .vjw-link-btn {
-            background-color: white;
-            color: #27ae60 !important;
-            font-weight: bold;
-            padding: 6px 12px;
-            border-radius: 20px;
-            text-decoration: none;
-            font-size: 0.85rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
         .flight-table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             margin-bottom: 10px;
         }
 
         .flight-table th, .flight-table td {
             padding: 6px 4px;
             text-align: center;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px dashed var(--border-color);
         }
 
         .flight-table th {
-            background-color: #f8f9fa;
-            color: #555;
-            font-weight: bold;
+            color: var(--text-sub);
+            font-weight: 500;
         }
 
         .hotel-detail {
-            font-size: 0.85rem;
-            background-color: #f8f9fa;
+            font-size: 0.82rem;
+            background-color: var(--bg-color);
             padding: 10px;
-            border-radius: 8px;
-            line-height: 1.5;
+            border-radius: 6px;
+            line-height: 1.55;
+            color: var(--text-main);
         }
 
-        .hotel-detail strong { color: var(--primary-color); }
+        /* 手機橫向滾動頁籤 */
+        .tab-container {
+            display: flex;
+            overflow-x: auto;
+            gap: 6px;
+            padding-bottom: 8px;
+            margin-bottom: 12px;
+            scrollbar-width: none; /* 隱藏 Firefox 滾動條 */
+        }
+
+        .tab-container::-webkit-scrollbar {
+            display: none; /* 隱藏 Chrome/Safari 滾動條 */
+        }
+
+        .tab-btn {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 0.82rem;
+            color: var(--text-sub);
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+        }
+
+        .tab-btn.active {
+            background-color: var(--primary-color);
+            color: #FFFFFF;
+            border-color: var(--primary-color);
+            font-weight: 500;
+        }
+
+        .day-panel { display: none; }
+        .day-panel.active { display: block; }
+
+        /* 行程卡片 */
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 14px;
+            margin-bottom: 12px;
+        }
+
+        .card-header {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 8px;
+            margin-bottom: 10px;
+        }
+
+        .note-box {
+            background-color: var(--bg-color);
+            border-left: 3px solid var(--primary-color);
+            padding: 8px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            color: var(--text-sub);
+            margin-bottom: 10px;
+        }
 
         .weather-box {
-            background-color: #eef7fc;
-            border-radius: 8px;
+            background-color: var(--bg-color);
+            border-radius: 6px;
             padding: 10px 12px;
             margin-bottom: 12px;
-            font-size: 0.88rem;
-            border: 1px solid #d0e6f5;
+            font-size: 0.82rem;
         }
 
         .weather-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-weight: bold;
-            color: #2980b9;
+            font-weight: 600;
+            color: var(--primary-color);
             margin-bottom: 6px;
         }
 
-        .tab-container {
-            display: flex;
-            overflow-x: auto;
-            gap: 6px;
-            padding-bottom: 10px;
-            margin-bottom: 14px;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .tab-btn {
-            background-color: #e0e6ed;
-            border: none;
-            padding: 8px 14px;
-            border-radius: 20px;
-            font-weight: bold;
-            font-size: 0.85rem;
-            color: #555;
-            cursor: pointer;
-            white-space: nowrap;
-        }
-
-        .tab-btn.active {
-            background-color: var(--primary-color);
-            color: white;
-            box-shadow: 0 2px 6px rgba(58, 107, 136, 0.3);
-        }
-
-        .day-panel { display: none; }
-        .day-panel.active { display: block; }
-
-        .card {
-            background-color: var(--card-bg);
-            border-radius: 12px;
-            padding: 14px;
-            margin-bottom: 14px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-        }
-
-        .card-header {
-            font-size: 1.1rem;
-            font-weight: bold;
-            color: var(--primary-color);
-            border-bottom: 2px solid #f0f0f0;
-            padding-bottom: 6px;
-            margin-bottom: 10px;
-        }
-
-        .note-box {
-            background-color: #fff8e7;
-            border-left: 4px solid #f39c12;
-            padding: 8px 10px;
-            border-radius: 4px;
-            font-size: 0.85rem;
-            margin-bottom: 10px;
-        }
-
+        /* 行程與行李清單 */
         .item-list { list-style: none; padding: 0; margin: 0; }
 
         .item {
             display: flex;
             align-items: flex-start;
-            padding: 8px 0;
-            border-bottom: 1px dashed #eee;
+            padding: 10px 0;
+            border-bottom: 1px dashed var(--border-color);
         }
 
         .item:last-child { border-bottom: none; }
 
+        /* 手機大觸控按鈕 Checkbox */
         .item input[type="checkbox"] {
-            margin-top: 4px;
-            margin-right: 10px;
-            width: 18px;
-            height: 18px;
+            margin-top: 2px;
+            margin-right: 12px;
+            width: 20px;
+            height: 20px;
+            accent-color: var(--primary-color);
             cursor: pointer;
         }
 
         .item-content { flex: 1; }
 
         .item-title {
-            font-weight: bold;
-            font-size: 0.95rem;
+            font-weight: 500;
+            font-size: 0.92rem;
             display: flex;
             align-items: center;
             flex-wrap: wrap;
             gap: 6px;
         }
 
-        .item-desc { font-size: 0.82rem; color: #666; margin-top: 2px; }
+        .item-desc { font-size: 0.8rem; color: var(--text-sub); margin-top: 2px; }
 
+        /* 日系大分類與小分類 */
         .item-group {
-            margin-bottom: 16px;
-            background: #fafafa;
-            border-radius: 8px;
-            padding: 10px;
-            border: 1px solid #eaeaea;
+            margin-bottom: 14px;
+            background: var(--bg-color);
+            border-radius: 6px;
+            padding: 10px 12px;
+            border: 1px solid var(--border-color);
         }
 
         .group-title {
-            font-size: 1rem;
-            font-weight: bold;
+            font-size: 0.92rem;
+            font-weight: 600;
             color: var(--primary-color);
-            border-bottom: 2px solid #e0e6ed;
+            border-bottom: 1px solid var(--border-color);
             padding-bottom: 4px;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
+            margin-bottom: 6px;
         }
 
         .sub-item-list {
             list-style: none;
-            padding-left: 8px;
+            padding-left: 0;
             margin: 0;
         }
 
         .sub-item-list .item {
             padding: 6px 0;
-            border-bottom: 1px dashed #e0e0e0;
+            border-bottom: 1px dashed var(--border-color);
         }
 
-        .sub-item-list .item:last-child {
-            border-bottom: none;
-        }
+        .sub-item-list .item:last-child { border-bottom: none; }
 
         .backup-option {
             display: flex;
@@ -272,35 +309,38 @@
             justify-content: space-between;
             margin-top: 4px;
             padding: 2px 0;
-            color: #555;
+            color: var(--text-sub);
         }
 
+        /* 標籤 Badge */
         .badge {
             display: inline-block;
-            padding: 2px 6px;
-            border-radius: 10px;
+            padding: 1px 7px;
+            border-radius: 4px;
             font-size: 0.72rem;
-            color: white;
-            font-weight: normal;
+            color: #FFFFFF;
+            font-weight: 400;
         }
 
-        .badge-flight { background-color: var(--accent-flight); }
-        .badge-food { background-color: var(--accent-food); }
-        .badge-spot { background-color: var(--accent-spot); }
-        .badge-shop { background-color: var(--accent-shop); }
-        .badge-cafe { background-color: var(--accent-cafe); }
-        .badge-hotel { background-color: var(--accent-hotel); }
-        .badge-prep { background-color: var(--accent-prep); }
-        .badge-memo { background-color: #7f8c8d; }
+        .badge-flight { background-color: var(--badge-flight); }
+        .badge-food { background-color: var(--badge-food); }
+        .badge-spot { background-color: var(--badge-spot); }
+        .badge-shop { background-color: var(--badge-shop); }
+        .badge-cafe { background-color: var(--badge-cafe); }
+        .badge-hotel { background-color: var(--badge-hotel); }
+        .badge-prep { background-color: var(--badge-prep); }
+        .badge-memo { background-color: var(--badge-memo); }
 
+        /* 簡約地圖膠囊按鈕 */
         .map-btn {
             display: inline-block;
-            padding: 2px 8px;
-            background-color: var(--map-btn-bg);
-            color: white !important;
+            padding: 2px 10px;
+            background-color: var(--btn-bg);
+            color: var(--btn-text) !important;
             text-decoration: none;
             border-radius: 12px;
             font-size: 0.75rem;
+            font-weight: 400;
             margin-left: auto;
         }
     </style>
@@ -314,6 +354,7 @@
 
     <div class="container">
 
+        <!-- Visit Japan Web 官方連結 Banner -->
         <div class="vjw-banner">
             <div>
                 <strong>Visit Japan Web</strong>
@@ -322,6 +363,7 @@
             <a href="https://services.digital.go.jp/zh-cmn-hant/visit-japan-web/" target="_blank" class="vjw-link-btn">開啟官網 ↗</a>
         </div>
 
+        <!-- 航班與住宿速查卡片 -->
         <div class="info-card">
             <h3>✈️ 航班資訊速查</h3>
             <table class="flight-table">
@@ -362,6 +404,7 @@
             </div>
         </div>
 
+        <!-- 天數切換頁籤 -->
         <div class="tab-container">
             <button class="tab-btn active" onclick="switchDay('prep')">🧳 行前準備與天氣</button>
             <button class="tab-btn" onclick="switchDay('day1')">Day 1 (9/30)</button>
@@ -372,13 +415,14 @@
             <button class="tab-btn" onclick="switchDay('day6')">Day 6 (10/5)</button>
         </div>
 
+        <!-- 🧳 行前準備與天氣面板 -->
         <div id="prep" class="day-panel active">
+            <!-- 天氣預報卡片 -->
             <div class="card">
                 <div class="card-header">☀️ 福岡當地天氣與穿搭建議</div>
                 <div class="weather-box">
                     <div class="weather-header">
                         <span>🍂 9 月底 - 10 月初秋季氣候</span>
-                        <!-- 已更正為官方標準 URL -->
                         <a href="https://tenki.jp/forecast/9/43/5710/" target="_blank" class="map-btn">🌤️ 即時天氣預報</a>
                     </div>
                     <div>🌡️ <strong>預估氣溫</strong>：約 18°C ～ 25°C（白天舒適，早晚偏涼）</div>
@@ -386,6 +430,7 @@
                 </div>
             </div>
 
+            <!-- 出國旅行行李確認清單 (階層式：大分類 ➔ 小分類) -->
             <div class="card">
                 <div class="card-header">🎒 行李打包檢查清單</div>
                 <div class="note-box">💡 勾選狀態會自動存於手機中，打包時邊看邊勾不漏接！</div>
@@ -1124,6 +1169,7 @@
 
     </div>
 
+    <!-- JavaScript 邏輯控制 -->
     <script>
         function switchDay(dayId) {
             const panels = document.querySelectorAll('.day-panel');
