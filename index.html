@@ -7,7 +7,7 @@
 
     <!-- 社群分享 (LINE/FB) 卡片預覽設定 -->
     <meta property="og:title" content="🇯🇵 福岡 6 天 5 夜自由行" />
-    <meta property="og:description" content="📅 2026/09/30 (三) ～ 10/05 (一) | 航班速查、景點地圖與行李清單" />
+    <meta property="og:description" content="📅 2026/09/30 (三) ～ 10/05 (一) | 航班速查、景點地圖與即時天氣" />
     <meta property="og:type" content="website" />
 
     <style>
@@ -49,7 +49,6 @@
             letter-spacing: 0.02em;
         }
 
-        /* 頁首 Header */
         header {
             background-color: var(--card-bg);
             border-bottom: 1px solid var(--border-color);
@@ -71,12 +70,11 @@
         }
 
         .container {
-            max-width: 480px; /* 針對手機螢幕最佳化寬度 */
+            max-width: 480px;
             margin: 0 auto;
             padding: 12px 14px 30px 14px;
         }
 
-        /* Visit Japan Web 簡約 Banner */
         .vjw-banner {
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -110,7 +108,6 @@
             white-space: nowrap;
         }
 
-        /* 資訊卡片（航班與住宿） */
         .info-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -156,19 +153,16 @@
             color: var(--text-main);
         }
 
-        /* 手機橫向滾動頁籤 */
         .tab-container {
             display: flex;
             overflow-x: auto;
             gap: 6px;
             padding-bottom: 8px;
             margin-bottom: 12px;
-            scrollbar-width: none; /* 隱藏 Firefox 滾動條 */
+            scrollbar-width: none;
         }
 
-        .tab-container::-webkit-scrollbar {
-            display: none; /* 隱藏 Chrome/Safari 滾動條 */
-        }
+        .tab-container::-webkit-scrollbar { display: none; }
 
         .tab-btn {
             background-color: var(--card-bg);
@@ -192,7 +186,6 @@
         .day-panel { display: none; }
         .day-panel.active { display: block; }
 
-        /* 行程卡片 */
         .card {
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -220,24 +213,59 @@
             margin-bottom: 10px;
         }
 
-        .weather-box {
+        /* --- 新增：無印風格即時天氣嵌入樣式 --- */
+        .weather-display-card {
             background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
             border-radius: 6px;
-            padding: 10px 12px;
-            margin-bottom: 12px;
-            font-size: 0.82rem;
+            padding: 12px;
+            margin-bottom: 10px;
         }
 
-        .weather-header {
+        .weather-display-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-weight: 600;
-            color: var(--primary-color);
-            margin-bottom: 6px;
+            font-size: 0.82rem;
+            color: var(--text-sub);
+            margin-bottom: 8px;
         }
 
-        /* 行程與行李清單 */
+        .weather-display-main {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 4px 0 8px 0;
+            border-bottom: 1px dashed var(--border-color);
+        }
+
+        .weather-temp-now {
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            line-height: 1;
+        }
+
+        .weather-temp-now span {
+            font-size: 1rem;
+            font-weight: 400;
+        }
+
+        .weather-condition-text {
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: var(--text-main);
+            text-align: right;
+        }
+
+        .weather-sub-details {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: var(--text-sub);
+            padding-top: 8px;
+        }
+
         .item-list { list-style: none; padding: 0; margin: 0; }
 
         .item {
@@ -249,7 +277,6 @@
 
         .item:last-child { border-bottom: none; }
 
-        /* 手機大觸控按鈕 Checkbox */
         .item input[type="checkbox"] {
             margin-top: 2px;
             margin-right: 12px;
@@ -272,7 +299,6 @@
 
         .item-desc { font-size: 0.8rem; color: var(--text-sub); margin-top: 2px; }
 
-        /* 日系大分類與小分類 */
         .item-group {
             margin-bottom: 14px;
             background: var(--bg-color);
@@ -312,7 +338,6 @@
             color: var(--text-sub);
         }
 
-        /* 標籤 Badge */
         .badge {
             display: inline-block;
             padding: 1px 7px;
@@ -331,7 +356,6 @@
         .badge-prep { background-color: var(--badge-prep); }
         .badge-memo { background-color: var(--badge-memo); }
 
-        /* 簡約地圖膠囊按鈕 */
         .map-btn {
             display: inline-block;
             padding: 2px 10px;
@@ -417,20 +441,37 @@
 
         <!-- 🧳 行前準備與天氣面板 -->
         <div id="prep" class="day-panel active">
-            <!-- 天氣預報卡片 -->
+            <!-- 直接嵌入即時天氣數據卡片 -->
             <div class="card">
-                <div class="card-header">☀️ 福岡當地天氣與穿搭建議</div>
-                <div class="weather-box">
-                    <div class="weather-header">
-                        <span>🍂 9 月底 - 10 月初秋季氣候</span>
-                        <a href="https://tenki.jp/forecast/9/43/5710/" target="_blank" class="map-btn">🌤️ 即時天氣預報</a>
+                <div class="card-header">☀️ 福岡市即時氣候與穿搭建議</div>
+                
+                <div class="weather-display-card">
+                    <div class="weather-display-header">
+                        <span>📍 日本福岡市 (Fukuoka)</span>
+                        <a href="https://tenki.jp/forecast/9/43/5710/" target="_blank" class="map-btn">詳細預報 ↗</a>
                     </div>
-                    <div>🌡️ <strong>預估氣溫</strong>：約 18°C ～ 25°C（白天舒適，早晚偏涼）</div>
-                    <div>🧥 <strong>穿搭建議</strong>：洋蔥式穿法！建議準備短袖/薄長袖，並隨身攜帶薄外套或風衣防風。</div>
+                    
+                    <div class="weather-display-main">
+                        <div class="weather-temp-now">
+                            <span id="live-temp">--</span><span>°C</span>
+                        </div>
+                        <div class="weather-condition-text" id="live-condition">
+                            天氣資料更新中...
+                        </div>
+                    </div>
+
+                    <div class="weather-sub-details">
+                        <span>今日預估氣溫：<strong id="live-temp-range">--°C ~ --°C</strong></span>
+                        <span>資料來源：Open-Meteo</span>
+                    </div>
+                </div>
+
+                <div class="note-box">
+                    🧥 <strong>秋季穿搭建議</strong>：秋季（9月底-10月初）平均氣溫約 18°C ~ 25°C。白天舒適宜人，早晚偏涼，建議採用洋蔥式穿搭並隨身攜帶薄外套防風。
                 </div>
             </div>
 
-            <!-- 出國旅行行李確認清單 (階層式：大分類 ➔ 小分類) -->
+            <!-- 出國旅行行李確認清單 -->
             <div class="card">
                 <div class="card-header">🎒 行李打包檢查清單</div>
                 <div class="note-box">💡 勾選狀態會自動存於手機中，打包時邊看邊勾不漏接！</div>
@@ -1171,6 +1212,7 @@
 
     <!-- JavaScript 邏輯控制 -->
     <script>
+        // 切換頁籤邏輯
         function switchDay(dayId) {
             const panels = document.querySelectorAll('.day-panel');
             panels.forEach(panel => panel.classList.remove('active'));
@@ -1182,9 +1224,60 @@
             event.currentTarget.classList.add('active');
         }
 
+        // WMO 天氣代碼對照表
+        function getWeatherDescription(code) {
+            const codes = {
+                0: '晴朗 ☀️',
+                1: '多雲時晴 🌤️',
+                2: '多雲 ⛅',
+                3: '陰天 ☁️',
+                45: '有霧 🌫️',
+                48: '濃霧 🌫️',
+                51: '毛毛雨 🌧️',
+                53: '中度毛毛雨 🌧️',
+                55: '大毛毛雨 🌧️',
+                61: '小雨 🌧️',
+                63: '中雨 🌧️',
+                65: '大雨 🌧️',
+                80: '陣雨 🌦️',
+                81: '強陣雨 🌦️',
+                82: '暴雨 ⛈️',
+                95: '雷陣雨 ⛈️'
+            };
+            return codes[code] || '多雲 ⛅';
+        }
+
+        // 即時抓取 Open-Meteo 福岡天氣數據
+        async function fetchLiveWeather() {
+            try {
+                // 福岡市經緯度: Lat 33.5902, Lon 130.4017
+                const url = 'https://api.open-meteo.com/v1/forecast?latitude=33.5902&longitude=130.4017&current_weather=true&daily=temperature_2m_max,temperature_2m_min&timezone=Asia%2FTokyo';
+                const response = await fetch(url);
+                const data = await response.json();
+
+                if (data && data.current_weather) {
+                    const temp = Math.round(data.current_weather.temperature);
+                    const weatherCode = data.current_weather.weathercode;
+                    const maxTemp = Math.round(data.daily.temperature_2m_max[0]);
+                    const minTemp = Math.round(data.daily.temperature_2m_min[0]);
+
+                    document.getElementById('live-temp').innerText = temp;
+                    document.getElementById('live-condition').innerText = getWeatherDescription(weatherCode);
+                    document.getElementById('live-temp-range').innerText = `${minTemp}°C ~ ${maxTemp}°C`;
+                }
+            } catch (error) {
+                console.log('無法取得即時天氣資料，使用預設值', error);
+                document.getElementById('live-condition').innerText = '多雲 ⛅ (預設)';
+                document.getElementById('live-temp').innerText = '22';
+                document.getElementById('live-temp-range').innerText = '18°C ~ 25°C';
+            }
+        }
+
+        // 頁面載入後自動恢復勾選狀態並讀取天氣
         document.addEventListener('DOMContentLoaded', () => {
+            fetchLiveWeather();
+
             const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-            
             checkboxes.forEach(box => {
                 const savedStatus = localStorage.getItem(box.id);
                 if (savedStatus === 'true') {
