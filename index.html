@@ -229,19 +229,22 @@
 
         .item-desc { font-size: 0.82rem; color: #666; margin-top: 2px; }
 
-        /* 大項目與子項目樣式設計 */
+        /* --- 大分類與小分類 (階層樣式) --- */
         .item-group {
-            padding: 10px 0;
-            border-bottom: 1px solid #f0f0f0;
+            margin-bottom: 16px;
+            background: #fafafa;
+            border-radius: 8px;
+            padding: 10px;
+            border: 1px solid #eaeaea;
         }
 
-        .item-group:last-child { border-bottom: none; }
-
         .group-title {
+            font-size: 1rem;
             font-weight: bold;
-            font-size: 0.98rem;
             color: var(--primary-color);
-            margin-bottom: 6px;
+            border-bottom: 2px solid #e0e6ed;
+            padding-bottom: 4px;
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
             gap: 6px;
@@ -249,14 +252,17 @@
 
         .sub-item-list {
             list-style: none;
-            padding-left: 14px;
-            margin: 4px 0 0 0;
-            border-left: 3px solid #e0e6ed;
+            padding-left: 8px;
+            margin: 0;
         }
 
         .sub-item-list .item {
-            padding: 6px 0 6px 8px;
-            border-bottom: 1px dashed #f5f5f5;
+            padding: 6px 0;
+            border-bottom: 1px dashed #e0e0e0;
+        }
+
+        .sub-item-list .item:last-child {
+            border-bottom: none;
         }
 
         /* 備案選項列表樣式 */
@@ -309,7 +315,7 @@
 
     <div class="container">
 
-        <!-- Visit Japan Web 官方連結 Banner (已更新為繁體中文官方網址) -->
+        <!-- Visit Japan Web 官方連結 Banner -->
         <div class="vjw-banner">
             <div>
                 <strong>Visit Japan Web</strong>
@@ -385,214 +391,166 @@
                 </div>
             </div>
 
-            <!-- 出國旅行行李確認清單 (精確對照 Excel 表格結構) -->
+            <!-- 出國旅行行李確認清單 (階層式：大分類 ➔ 小分類) -->
             <div class="card">
-                <div class="card-header">🎒 出國旅行行李確認清單</div>
+                <div class="card-header">🎒 行李打包檢查清單</div>
                 <div class="note-box">💡 勾選狀態會自動存於手機中，打包時邊看邊勾不漏接！</div>
                 
-                <div class="item-list">
-
-                    <!-- 大項目 1：出國必帶物品 -->
-                    <div class="item-group">
-                        <div class="group-title"><span class="badge badge-flight">🔴 必帶</span>出國必帶物品</div>
-                        <ul class="sub-item-list">
-                            <li class="item">
-                                <input type="checkbox" id="prep_ess_1">
-                                <div class="item-content"><div class="item-title">護照 (6個月內有效)</div></div>
-                            </li>
-                            <li class="item">
-                                <input type="checkbox" id="prep_ess_2">
-                                <div class="item-content"><div class="item-title">簽證 / Visit Japan Web 填寫</div></div>
-                            </li>
-                            <li class="item">
-                                <input type="checkbox" id="prep_ess_3">
-                                <div class="item-content"><div class="item-title">當地外幣、些許台幣</div></div>
-                            </li>
-                            <li class="item">
-                                <input type="checkbox" id="prep_ess_4">
-                                <div class="item-content"><div class="item-title">護照影本 (與護照分開放)</div></div>
-                            </li>
-                            <li class="item">
-                                <input type="checkbox" id="prep_ess_5">
-                                <div class="item-content"><div class="item-title">原子筆</div></div>
-                            </li>
-                            <li class="item">
-                                <input type="checkbox" id="prep_ess_6">
-                                <div class="item-content"><div class="item-title">相機 (充好電、記憶卡)</div></div>
-                            </li>
-                            <li class="item">
-                                <input type="checkbox" id="prep_ess_7">
-                                <div class="item-content"><div class="item-title">信用卡 / 雙幣卡</div></div>
-                            </li>
-                            <li class="item">
-                                <input type="checkbox" id="prep_ess_8">
-                                <div class="item-content"><div class="item-title">身分證 / 身分證影本</div></div>
-                            </li>
-                            <li class="item">
-                                <input type="checkbox" id="prep_ess_9">
-                                <div class="item-content"><div class="item-title">訂房憑證</div></div>
-                            </li>
-                            <li class="item">
-                                <input type="checkbox" id="prep_ess_10">
-                                <div class="item-content"><div class="item-title">當地行程憑證 (KKday等)</div></div>
-                            </li>
-                            <li class="item">
-                                <input type="checkbox" id="prep_ess_11">
-                                <div class="item-content"><div class="item-title">智慧型手機</div></div>
-                            </li>
-                            <li class="item">
-                                <input type="checkbox" id="prep_ess_12">
-                                <div class="item-content"><div class="item-title">地圖 / 規劃行程 / 旅遊書</div></div>
-                            </li>
-                            <li class="item">
-                                <input type="checkbox" id="prep_ess_13">
-                                <div class="item-content"><div class="item-title">2吋大頭照 * 2</div></div>
-                            </li>
-                            <li class="item">
-                                <input type="checkbox" id="prep_ess_14">
-                                <div class="item-content"><div class="item-title">轉接插頭 / 充電器 / 多孔充電頭</div></div>
-                            </li>
-                            <li class="item">
-                                <input type="checkbox" id="prep_ess_15">
-                                <div class="item-content"><div class="item-title">小包面紙 / 濕紙巾</div></div>
-                            </li>
-                            <li class="item">
-                                <input type="checkbox" id="prep_ess_16">
-                                <div class="item-content"><div class="item-title">雨傘 / 雨具</div></div>
-                            </li>
-                            <li class="item">
-                                <input type="checkbox" id="prep_ess_17">
-                                <div class="item-content"><div class="item-title">眼鏡 / 隱形眼鏡 / 藥水盒</div></div>
-                            </li>
-                            <li class="item">
-                                <input type="checkbox" id="prep_ess_18">
-                                <div class="item-content"><div class="item-title">水壺 / 保溫瓶</div></div>
-                            </li>
-                            <li class="item">
-                                <input type="checkbox" id="prep_ess_19">
-                                <div class="item-content"><div class="item-title">租借的網路分享器 / eSIM / 網卡</div></div>
-                            </li>
-                            <li class="item">
-                                <input type="checkbox" id="prep_ess_20">
-                                <div class="item-content"><div class="item-title">貼身衣物 / 換洗衣物 / 襪子 / 睡衣</div></div>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <!-- 大項目 2：出國可能會用到 (視個人情況) -->
-                    <div class="item-group">
-                        <div class="group-title"><span class="badge badge-prep">🟡 視情況</span>出國可能會用到</div>
-                        <ul class="sub-item-list">
-                            <li class="item">
-                                <input type="checkbox" id="prep_opt_1">
-                                <div class="item-content"><div class="item-title">行動電源 (記得放置隨身行李)</div></div>
-                            </li>
-                            <li class="item">
-                                <input type="checkbox" id="prep_opt_2">
-                                <div class="item-content"><div class="item-title">盥洗用品 (牙膏、牙刷、梳子、浴帽)</div></div>
-                            </li>
-                            <li class="item">
-                                <input type="checkbox" id="prep_opt_3">
-                                <div class="item-content"><div class="item-title">保養品、化妝品 (小剪刀勿放隨身)</div></div>
-                            </li>
-                            <li class="item">
-                                <input type="checkbox" id="prep_opt_4">
-                                <div class="item-content"><div class="item-title">刮鬍刀</div></div>
-                            </li>
-                            <li class="item">
-                                <input type="checkbox" id="prep_opt_5">
-                                <div class="item-content"><div class="item-title">生理用品</div></div>
-                            </li>
-                            <li class="item">
-                                <input type="checkbox" id="prep_opt_6">
-                                <div class="item-content"><div class="item-title">常備藥品 (腸胃藥、暈車藥、止痛藥)</div></div>
-                            </li>
-                            <li class="item">
-                                <input type="checkbox" id="prep_opt_7">
-                                <div class="item-content"><div class="item-title">OK繃、棉花棒</div></div>
-                            </li>
-                            <li class="item">
-                                <input type="checkbox" id="prep_opt_8">
-                                <div class="item-content"><div class="item-title">小毛巾 / 手帕</div></div>
-                            </li>
-                            <li class="item">
-                                <input type="checkbox" id="prep_opt_9">
-                                <div class="item-content"><div class="item-title">牙線</div></div>
-                            </li>
-                            <li class="item">
-                                <input type="checkbox" id="prep_opt_10">
-                                <div class="item-content"><div class="item-title">防曬用品、曬後保養品</div></div>
-                            </li>
-                            <li class="item">
-                                <input type="checkbox" id="prep_opt_11">
-                                <div class="item-content"><div class="item-title">防蚊液、擦止癢藥</div></div>
-                            </li>
-                            <li class="item">
-                                <input type="checkbox" id="prep_opt_12">
-                                <div class="item-content"><div class="item-title">酸痛貼布、休足時間</div></div>
-                            </li>
-                            <li class="item">
-                                <input type="checkbox" id="prep_opt_13">
-                                <div class="item-content"><div class="item-title">面膜</div></div>
-                            </li>
-                            <li class="item">
-                                <input type="checkbox" id="prep_opt_14">
-                                <div class="item-content"><div class="item-title">塑膠袋些許 (裝髒衣物)</div></div>
-                            </li>
-                            <li class="item">
-                                <input type="checkbox" id="prep_opt_15">
-                                <div class="item-content"><div class="item-title">腳架 / 耳機 / 筆電</div></div>
-                            </li>
-                            <li class="item">
-                                <input type="checkbox" id="prep_opt_16">
-                                <div class="item-content"><div class="item-title">自拍神器 (不可放於隨身行李)</div></div>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <!-- 大項目 3：夏天 / 戶外遮陽備品 -->
-                    <div class="item-group">
-                        <div class="group-title"><span class="badge badge-food">☀️ 遮陽戶外</span>夏天 / 戶外防曬備品</div>
-                        <ul class="sub-item-list">
-                            <li class="item">
-                                <input type="checkbox" id="prep_sum_1">
-                                <div class="item-content"><div class="item-title">遮陽帽 / 太陽眼鏡</div></div>
-                            </li>
-                            <li class="item">
-                                <input type="checkbox" id="prep_sum_2">
-                                <div class="item-content"><div class="item-title">陽傘 / 防曬乳 / 曬後保養</div></div>
-                            </li>
-                            <li class="item">
-                                <input type="checkbox" id="prep_sum_3">
-                                <div class="item-content"><div class="item-title">遮陽薄外套 / 防曬口罩</div></div>
-                            </li>
-                            <li class="item">
-                                <input type="checkbox" id="prep_sum_4">
-                                <div class="item-content"><div class="item-title">保濕乳液 / 保濕面膜</div></div>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <!-- 大項目 4：秋冬保暖備品 -->
-                    <div class="item-group">
-                        <div class="group-title"><span class="badge badge-hotel">❄️ 保暖防風</span>保暖與季節備品</div>
-                        <ul class="sub-item-list">
-                            <li class="item">
-                                <input type="checkbox" id="prep_win_1">
-                                <div class="item-content"><div class="item-title">保暖外套 / 風衣</div></div>
-                            </li>
-                            <li class="item">
-                                <input type="checkbox" id="prep_win_2">
-                                <div class="item-content"><div class="item-title">毛帽 / 圍巾 / 耳罩</div></div>
-                            </li>
-                            <li class="item">
-                                <input type="checkbox" id="prep_win_3">
-                                <div class="item-content"><div class="item-title">暖暖包 / 防風口罩</div></div>
-                            </li>
-                        </ul>
-                    </div>
-
+                <!-- 大分類 1：重要證件與金流 -->
+                <div class="item-group">
+                    <div class="group-title">📄 重要證件與金流</div>
+                    <ul class="sub-item-list">
+                        <li class="item">
+                            <input type="checkbox" id="prep_doc_passport">
+                            <div class="item-content"><div class="item-title">護照 (6個月以上有效)</div></div>
+                        </li>
+                        <li class="item">
+                            <input type="checkbox" id="prep_doc_vjw">
+                            <div class="item-content"><div class="item-title">Visit Japan Web 填寫 & QR Code 截圖</div></div>
+                        </li>
+                        <li class="item">
+                            <input type="checkbox" id="prep_doc_money">
+                            <div class="item-content"><div class="item-title">日幣現金 / 信用卡 / 雙幣卡</div></div>
+                        </li>
+                        <li class="item">
+                            <input type="checkbox" id="prep_doc_id">
+                            <div class="item-content"><div class="item-title">身分證 / 身分證影本 / 護照影本</div></div>
+                        </li>
+                        <li class="item">
+                            <input type="checkbox" id="prep_doc_voucher">
+                            <div class="item-content"><div class="item-title">訂房憑證 / 當地行程憑證 (KKday等)</div></div>
+                        </li>
+                        <li class="item">
+                            <input type="checkbox" id="prep_doc_insurance">
+                            <div class="item-content"><div class="item-title">海外旅平險 / 不便險保單憑證</div></div>
+                        </li>
+                    </ul>
                 </div>
+
+                <!-- 大分類 2：衣物與穿搭 -->
+                <div class="item-group">
+                    <div class="group-title">👔 衣物與穿搭</div>
+                    <ul class="sub-item-list">
+                        <li class="item">
+                            <input type="checkbox" id="prep_cloth_bra">
+                            <div class="item-content"><div class="item-title">內衣</div></div>
+                        </li>
+                        <li class="item">
+                            <input type="checkbox" id="prep_cloth_undies">
+                            <div class="item-content"><div class="item-title">內褲</div></div>
+                        </li>
+                        <li class="item">
+                            <input type="checkbox" id="prep_cloth_socks">
+                            <div class="item-content"><div class="item-title">襪子</div></div>
+                        </li>
+                        <li class="item">
+                            <input type="checkbox" id="prep_cloth_tops">
+                            <div class="item-content"><div class="item-title">上衣 / 薄長袖 / 罩衫</div></div>
+                        </li>
+                        <li class="item">
+                            <input type="checkbox" id="prep_cloth_bottoms">
+                            <div class="item-content"><div class="item-title">褲子 / 裙子</div></div>
+                        </li>
+                        <li class="item">
+                            <input type="checkbox" id="prep_cloth_sleepwear">
+                            <div class="item-content"><div class="item-title">睡衣 / 貼身衣物</div></div>
+                        </li>
+                        <li class="item">
+                            <input type="checkbox" id="prep_cloth_jacket">
+                            <div class="item-content"><div class="item-title">保暖薄外套 / 風衣</div></div>
+                        </li>
+                        <li class="item">
+                            <input type="checkbox" id="prep_cloth_shoes">
+                            <div class="item-content"><div class="item-title">舒適休閒鞋 / 走步鞋</div></div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 大分類 3：電器與 3C 通訊 -->
+                <div class="item-group">
+                    <div class="group-title">🔌 電器與 3C 通訊</div>
+                    <ul class="sub-item-list">
+                        <li class="item">
+                            <input type="checkbox" id="prep_elec_powerbank">
+                            <div class="item-content"><div class="item-title">行動電源 (記得放置隨身行李)</div></div>
+                        </li>
+                        <li class="item">
+                            <input type="checkbox" id="prep_elec_phone">
+                            <div class="item-content"><div class="item-title">智慧型手機 / 充電線材</div></div>
+                        </li>
+                        <li class="item">
+                            <input type="checkbox" id="prep_elec_charger">
+                            <div class="item-content"><div class="item-title">多孔充電頭 / 轉接插頭</div></div>
+                        </li>
+                        <li class="item">
+                            <input type="checkbox" id="prep_elec_sim">
+                            <div class="item-content"><div class="item-title">日本網卡 / eSIM / 網路分享器</div></div>
+                        </li>
+                        <li class="item">
+                            <input type="checkbox" id="prep_elec_camera">
+                            <div class="item-content"><div class="item-title">相機 (充好電、記憶卡、充電器)</div></div>
+                        </li>
+                        <li class="item">
+                            <input type="checkbox" id="prep_elec_gadgets">
+                            <div class="item-content"><div class="item-title">自拍棒 (不可放隨身) / 腳架 / 耳機 / 筆電</div></div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 大分類 4：藥品與個人保養 -->
+                <div class="item-group">
+                    <div class="group-title">💊 藥品與個人保養</div>
+                    <ul class="sub-item-list">
+                        <li class="item">
+                            <input type="checkbox" id="prep_care_meds">
+                            <div class="item-content"><div class="item-title">常備藥品 (腸胃藥、暈車藥、止痛藥)</div></div>
+                        </li>
+                        <li class="item">
+                            <input type="checkbox" id="prep_care_firstaid">
+                            <div class="item-content"><div class="item-title">OK繃 / 棉花棒 / 酸痛貼布 / 休足時間</div></div>
+                        </li>
+                        <li class="item">
+                            <input type="checkbox" id="prep_care_wash">
+                            <div class="item-content"><div class="item-title">盥洗用品 (牙膏、牙刷、梳子、刮鬍刀、浴帽)</div></div>
+                        </li>
+                        <li class="item">
+                            <input type="checkbox" id="prep_care_skin">
+                            <div class="item-content"><div class="item-title">保養品 / 化妝品 / 防曬乳 / 曬後保養 / 面膜</div></div>
+                        </li>
+                        <li class="item">
+                            <input type="checkbox" id="prep_care_sanitary">
+                            <div class="item-content"><div class="item-title">生理用品 / 牙線</div></div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 大分類 5：生活與季節備品 -->
+                <div class="item-group">
+                    <div class="group-title">☂️ 生活與季節備品</div>
+                    <ul class="sub-item-list">
+                        <li class="item">
+                            <input type="checkbox" id="prep_life_umbrella">
+                            <div class="item-content"><div class="item-title">雨傘 / 雨具 / 陽傘</div></div>
+                        </li>
+                        <li class="item">
+                            <input type="checkbox" id="prep_life_bottle">
+                            <div class="item-content"><div class="item-title">水壺 / 保溫瓶</div></div>
+                        </li>
+                        <li class="item">
+                            <input type="checkbox" id="prep_life_sun">
+                            <div class="item-content"><div class="item-title">遮陽帽 / 太陽眼鏡</div></div>
+                        </li>
+                        <li class="item">
+                            <input type="checkbox" id="prep_life_stationery">
+                            <div class="item-content"><div class="item-title">原子筆 / 小包面紙 / 濕紙巾</div></div>
+                        </li>
+                        <li class="item">
+                            <input type="checkbox" id="prep_life_bags">
+                            <div class="item-content"><div class="item-title">塑膠袋些許 (裝髒衣物) / 毛巾 / 手帕</div></div>
+                        </li>
+                    </ul>
+                </div>
+
             </div>
         </div>
 
