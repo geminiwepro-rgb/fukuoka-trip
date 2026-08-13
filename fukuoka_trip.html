@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>福岡 5 天 4 夜日本旅遊行程</title>
+    <style>
+        /* 頁面整體樣式設定 */
+        :root {
+            --primary-color: #3a6b88;
+            --bg-color: #f4f7f6;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+            --accent-food: #e67e22;
+            --accent-spot: #27ae60;
+            --accent-shop: #8e44ad;
+            --accent-cafe: #d35400;
+            --accent-hotel: #2980b9;
+            --map-btn-bg: #4285F4;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang TC", "Microsoft JhengHei", sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        /* 標頭 Header */
+        header {
+            background: linear-gradient(135deg, #3a6b88, #5a93b5);
+            color: white;
+            text-align: center;
+            padding: 24px 16px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+        }
+
+        header p {
+            margin: 8px 0 0 0;
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
+
+        /* 主容器 */
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 16px;
+        }
+
+        /* 天數分頁切換按鈕 (Tabs) */
+        .tab-container {
+            display: flex;
+            overflow-x: auto;
+            gap: 8px;
+            padding-bottom: 12px;
+            margin-bottom: 16px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .tab-btn {
+            background-color: #e0e6ed;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            color: #555;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+        }
+
+        .tab-btn.active {
+            background-color: var(--primary-color);
+            color: white;
+            box-shadow: 0 2px 6px rgba(58, 107, 136, 0.4);
+        }
+
+        /* 行程卡片面板 */
+        .day-panel {
+            display: none;
+        }
+
+        .day-panel.active {
+            display: block;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .card-header {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 8px;
+            margin-bottom: 12px;
+        }
+
+        .note-box {
+            background-color: #fff8e7;
+            border-left: 4px solid #f39c12;
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+        }
+
+        /* 清單項目 */
+        .item-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .item {
+            display: flex;
+            align-items: flex-start;
+            padding: 10px 0;
+            border-bottom: 1px dashed #eee;
+        }
+
+        .item:last-child {
+            border-bottom: none;
+        }
+
+        .item input[type="checkbox"] {
+            margin-top: 4px;
+            margin-right: 12px;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .item-content {
+            flex: 1;
+        }
+
+        .item-title {
+            font-weight: bold;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .item-desc {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 2px;
+        }
+
+        /* 分類標籤 Badge */
+        .badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            color: white;
+            font-weight: normal;
+        }
+
+        .badge-food { background-color: var(--accent-food); }
+        .badge-spot { background-color: var(--accent-spot); }
+        .badge-shop { background-color: var(--accent-shop); }
+        .badge-cafe { background-color: var(--accent-cafe); }
+        .badge-hotel { background-color: var(--accent-hotel); }
+        .badge-memo { background-color: #7f8c8d; }
+
+        /* 地圖按鈕樣式 */
+        .map-btn {
+            display: inline-block;
+            padding: 2px 8px;
+            background-color: var(--map-btn-bg);
+            color: white !important;
+            text-decoration: none;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: normal;
+            transition: opacity 0.2s;
+            margin-left: auto;
+        }
+
+        .map-btn:hover {
+            opacity: 0.85;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>🇯🇵 福岡 5 天 4 夜自由行</h1>
+        <p>📅 2026/09/30 (三) ～ 10/04 (日)</p>
+    </header>
+
+    <div class="container">
+        <!-- 天數切換頁籤 -->
+        <div class="tab-container">
+            <button class="tab-btn active" onclick="switchDay('day1')">Day 1 (9/30)</button>
+            <button class="tab-btn" onclick="switchDay('day2')">Day 2 (10/1)</button>
+            <button class="tab-btn" onclick="switchDay('day3')">Day 3 (10/2)</button>
+            <button class="tab-btn" onclick="switchDay('day4')">Day 4 (10/3)</button>
+            <button class="tab-btn" onclick="switchDay('day5')">Day 5 (10/4)</button>
+        </div>
+
+        <!-- Day 1 -->
+        <div id="day1" class="day-panel active">
+            <div class="card">
+                <div class="card-header">09/30 (三) Day 1：飯店附近</div>
+                <ul class="item-list">
+                    <li class="item">
+                        <input type="checkbox" id="d1_1">
+                        <div class="item-content">
+                            <div class="item-title">
+                                <span class="badge badge-memo">準備</span>Visit Japan Web 保險
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <input type="checkbox" id="d1_2">
+                        <div class="item-content">
+                            <div class="item-title">
+                                <span class="badge badge-hotel">住宿</span>博多車站東方飯店 放行李
+                                <a href="https://www.google.com/maps/search/?api=1&query=博多車站東方飯店" target="_blank" class="map-btn">🗺️ 地圖</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <input type="checkbox" id="d1_3">
+                        <div class="item-content">
+                            <div class="item-title">
+                                <span class="badge badge-food">美食</span>水炊料亭 博多華味鳥 博多站前店
+                                <a href="https://www.google.com/maps/search/?api=1&query=水炊料亭+博多華味鳥+博多站前店" target="_blank" class="map-btn">🗺️ 地圖</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <input type="checkbox" id="d1_4">
+                        <div class="item-content">
+                            <div class="item-title">
+                                <span class="badge badge-cafe">咖啡</span>REC COFFEE 博多丸井店
+                                <a href="https://www.google.com/maps/search/?api=1&query=REC+COFFEE+博多丸井店" target="_blank" class="map-btn">🗺️ 地圖</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <input type="checkbox" id="d1_5">
+                        <div class="item-content">
+                            <div class="item-title">
+                                <span class="badge badge-shop">購物</span>福岡寶可夢中心
+                                <a href="https://www.google.com/maps/search/?api=1&query=福岡寶可夢中心" target="_blank" class="map-btn">🗺️ 地圖</a>
+                            </div>
+                            <div class="item-desc">博多丸井 OIOI 百貨 8 樓</div>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <input type="checkbox" id="d1_6">
+                        <div class="item-content">
+                            <div class="item-title">
+                                <span class="badge badge-shop">購物</span>茅乃舍 伴手禮
+                                <a href="https://www.google.com/maps/search/?api=1&query=茅乃舍+博多車站" target="_blank" class="map-btn">🗺️ 地圖</a>
+                            </div>
+                            <div class="item-desc">博多車站 1 樓，靠近築紫口，可退稅</div>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <input type="checkbox" id="d1_7">
+                        <div class="item-content">
+                            <div class="item-title"><span class="badge badge-hotel">飯店</span>回飯店休息</div>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <input type="checkbox" id="d1_8">
+                        <div class="item-content">
+                            <div class="item-title">
+                                <span class="badge badge-spot">景點</span>博多運河城
+                                <a href="https://www.google.com/maps/search/?api=1&query=博多運河城" target="_blank" class="map-btn">🗺️ 地圖</a>
+                            </div>
+                            <div class="item-desc">水舞秀值得看，可查時刻表</div>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <input type="checkbox" id="d1_9">
+                        <div class="item-content">
+                            <div class="item-title">
+                                <span class="badge badge-spot">景點</span>中洲屋台
+                                <a href="https://www.google.com/maps/search/?api=1&query=中洲屋台" target="_blank" class="map-btn">🗺️ 地圖</a>
+                            </div>
+                            <div class="item-desc">只看不吃</div>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <input type="checkbox" id="d1_10">
+                        <div class="item-content">
+                            <div class="item-title">
+                                <span class="badge badge-shop">購物</span>Trial Go 超市
+                                <a href="https://www.google.com/maps/search/?api=1&query=TRIAL+GO" target="_blank" class="map-btn">🗺️ 地圖</a>
+                            </div>
+                            <div class="item-desc">小型超市/大型便利商店，走路 10 分鐘，需現金付款</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Day 2 -->
+        <div id="day2" class="day-panel">
+            <div class="card">
+                <div class="card-header">10/01 (四) Day 2：糸島一日遊</div>
+                <div class="note-box">💡 車程約一個半小時，可以考慮 KKday 一日行程。</div>
+                <ul class="item-list">
+                    <li class="item">
+                        <input type="checkbox" id="d2_1">
+                        <div class="item-content">
+                            <div class="item-title">
+                                <span class="badge badge-spot">景點</span>櫻井二見浦 夫婦岩
+                                <a href="https://www.google.com/maps/search/?api=1&query=櫻井二見浦+夫婦岩" target="_blank" class="map-btn">🗺️ 地圖</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <input type="checkbox" id="d2_2">
+                        <div class="item-content">
+                            <div class="item-title">
+                                <span class="badge badge-food">美食</span>糸島海鮮堂 二見浦本店
+                                <a href="https://www.google.com/maps/search/?api=1&query=糸島海鮮堂+二見浦本店" target="_blank" class="map-btn">🗺️ 地圖</a>
+                            </div>
+                            <div class="item-desc">海鮮丼飯，包廂要預約且需座位費</div>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <input type="checkbox" id="d2_3">
+                        <div class="item-content">
+                            <div class="item-title">
+                                <span class="badge badge-spot">景點</span>PALM BEACH 天使之羽
+                                <a href="https://www.google.com/maps/search/?api=1&query=PALM+BEACH+天使之羽" target="_blank" class="map-btn">🗺️ 地圖</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <input type="checkbox" id="d2_4">
+                        <div class="item-content">
+                            <div class="item-title">
+                                <span class="badge badge-cafe">咖啡</span>Beach Cafe SUNSET
+                                <a href="https://www.google.com/maps/search/?api=1&query=Beach+Cafe+SUNSET+糸島" target="_blank" class="map-btn">🗺️ 地圖</a>
+                            </div>
+                            <div class="item-desc">備案：SURF SIDE CAFE Palm Beach Gardens</div>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <input type="checkbox" id="d2_5">
+                        <div class="item-content">
+                            <div class="item-title">
+                                <span class="badge badge-spot">景點</span>Palm Tree Swing 糸島棕櫚樹鞦韆
+                                <a href="https://www.google.com/maps/search/?api=1&query=糸島棕櫚樹鞦韆" target="_blank" class="map-btn">🗺️ 地圖</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <input type="checkbox" id="d2_6">
+                        <div class="item-content">
+                            <div class="item-title"><span class="badge badge-food">晚餐</span>博多晚餐（待定）</div>
+                            <div class="item-desc">備案：Shake Shack、天神葫蘆壽司</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Day 3 -->
+        <div id="day3" class="day-panel">
+            <div class="card">
+                <div class="card-header">10/02 (五) Day 3：太宰府</div>
+                <div class="note-box">💡 可以考慮 KKday 一日行程。</div>
+                <ul class="item-list">
+                    <li class="item">
+                        <input type="checkbox" id="d3_1">
+                        <div class="item-content">
+                            <div class="item-title">
+                                <span class="badge badge-spot">景點</span>太宰府車站
+                                <a href="https://www.google.com/maps/search/?api=1&query=太宰府車站" target="_blank" class="map-btn">🗺️ 地圖</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <input type="checkbox" id="d3_2">
+                        <div class="item-content">
+                            <div class="item-title">
+                                <span class="badge badge-food">美食</span>一蘭五角碗 太宰府參道店
+                                <a href="https://www.google.com/maps/search/?api=1&query=一蘭+太宰府參道店" target="_blank" class="map-btn">🗺️ 地圖</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <input type="checkbox" id="d3_3">
+                        <div class="item-content">
+                            <div class="item-title">
+                                <span class="badge badge-cafe">咖啡</span>星巴克 太宰府天滿宮表參道店
+                                <a href="https://www.google.com/maps/search/?api=1&query=星巴克+太宰府天滿宮表參道店" target="_blank" class="map-btn">🗺️ 地圖</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <input type="checkbox" id="d3_4">
+                        <div class="item-content">
+                            <div class="item-title">
+                                <span class="badge badge-food">點心</span>YAMAYA 明太子麵包
+                                <a href="https://www.google.com/maps/search/?api=1&query=YAMAYA+太宰府" target="_blank" class="map-btn">🗺️ 地圖</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <input type="checkbox" id="d3_5">
+                        <div class="item-content">
+                            <div class="item-title">
+                                <span class="badge badge-food">點心</span>天山本店草莓大福
+                                <a href="https://www.google.com/maps/search/?api=1&query=天山本店+太宰府" target="_blank" class="map-btn">🗺️ 地圖</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <input type="checkbox" id="d3_6">
+                        <div class="item-content">
+                            <div class="item-title">
+                                <span class="badge badge-food">點心</span>かさの家 梅枝餅
+                                <a href="https://www.google.com/maps/search/?api=1&query=かさの家+太宰府" target="_blank" class="map-btn">🗺️ 地圖</a>
+                            </div>
+                            <div class="item-desc">備案：武安</div>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <input type="checkbox" id="d3_7">
+                        <div class="item-content">
+                            <div class="item-title">
+                                <span class="badge badge-spot">景點</span>太宰府天滿宮
+                                <a href="https://www.google.com/maps/search/?api=1&query=太宰府天滿宮" target="_blank" class="map-btn">🗺️ 地圖</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <input type="checkbox" id="d3_8">
+                        <div class="item-content">
+                            <div class="item-title">
+                                <span class="badge badge-spot">景點</span>寶滿宮竈門神社
+                                <a href="https://www.google.com/maps/search/?api=1&query=寶滿宮竈門神社" target="_blank" class="map-btn">🗺️ 地圖</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <input type="checkbox" id="d3_9">
+                        <div class="item-content">
+                            <div class="item-title">
+                                <span class="badge badge-food">美食</span>ふくや 明太子茶泡飯
+                                <a href="https://www.google.com/maps/search/?api=1&query=味の明太子ふくや+太宰府店" target="_blank" class="map-btn">🗺️ 地圖</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <input type="checkbox" id="d3_10">
+                        <div class="item-content">
+                            <div class="item-title"><span class="badge badge-food">晚餐</span>博多晚餐（待定）</div>
+                            <div class="item-desc">備案：Shake Shack、天神葫蘆壽司</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Day 4 -->
+        <div id="day4" class="day-panel">
+            <div class="card">
+                <div class="card-header">10/03 (六) Day 4：天神周邊</div>
+                <ul class="item-list">
+                    <li class="item">
+                        <input type="checkbox" id="d4_1">
+                        <div class="item-content">
+                            <div class="item-title">
+                                <span class="badge badge-spot">景點</span>福岡塔（視情況）
+                                <a href="https://www.google.com/maps/search/?api=1&query=福岡塔" target="_blank" class="map-btn">🗺️ 地圖</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <input type="checkbox" id="d4_2">
+                        <div class="item-content">
+                            <div class="item-title">
+                                <span class="badge badge-spot">景點</span>大濠公園
+                                <a href="https://www.google.com/maps/search/?api=1&query=大濠公園" target="_blank" class="map-btn">🗺️ 地圖</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <input type="checkbox" id="d4_3">
+                        <div class="item-content">
+                            <div class="item-title">
+                                <span class="badge badge-cafe">咖啡</span>大濠公園星巴克
+                                <a href="https://www.google.com/maps/search/?api=1&query=星巴克+大濠公園店" target="_blank" class="map-btn">🗺️ 地圖</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <input type="checkbox" id="d4_4">
+                        <div class="item-content">
+                            <div class="item-title">
+                                <span class="badge badge-spot">景點</span>福岡城跡
+                                <a href="https://www.google.com/maps/search/?api=1&query=福岡城跡" target="_blank" class="map-btn">🗺️ 地圖</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <input type="checkbox" id="d4_5">
+                        <div class="item-content">
+                            <div class="item-title">
+                                <span class="badge badge-food">美食</span>The Full Full 明太子麵包
+                                <a href="https://www.google.com/maps/search/?api=1&query=FullFull+天神" target="_blank" class="map-btn">🗺️ 地圖</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <input type="checkbox" id="d4_6">
+                        <div class="item-content">
+                            <div class="item-title">
+                                <span class="badge badge-food">美食</span>Truffle BAKERY 白松露鹽麵包
+                                <a href="https://www.google.com/maps/search/?api=1&query=TruffleBAKERY+博多" target="_blank" class="map-btn">🗺️ 地圖</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <input type="checkbox" id="d4_7">
+                        <div class="item-content">
+                            <div class="item-title">
+                                <span class="badge badge-shop">購物</span>福岡 PARCO
+                                <a href="https://www.google.com/maps/search/?api=1&query=福岡PARCO" target="_blank" class="map-btn">🗺️ 地圖</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <input type="checkbox" id="d4_8">
+                        <div class="item-content">
+                            <div class="item-title">
+                                <span class="badge badge-shop">購物</span>天神地下街（3 Coins）
+                                <a href="https://www.google.com/maps/search/?api=1&query=天神地下街" target="_blank" class="map-btn">🗺️ 地圖</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <input type="checkbox" id="d4_9">
+                        <div class="item-content">
+                            <div class="item-title">
+                                <span class="badge badge-food">點心</span>RINGO 蘋果派
+                                <a href="https://www.google.com/maps/search/?api=1&query=RINGO+天神地下街店" target="_blank" class="map-btn">🗺️ 地圖</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <input type="checkbox" id="d4_10">
+                        <div class="item-content">
+                            <div class="item-title">
+                                <span class="badge badge-food">點心</span>PRESS BUTTER SAND 巧克力夾心
+                                <a href="https://www.google.com/maps/search/?api=1&query=PRESS+BUTTER+SAND+天神地下街店" target="_blank" class="map-btn">🗺️ 地圖</a>
+                            </div>
+                            <div class="item-desc">天神地下街店，機場也有賣</div>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <input type="checkbox" id="d4_11">
+                        <div class="item-content">
+                            <div class="item-title">
+                                <span class="badge badge-cafe">咖啡</span>Blue Bottle Coffee 福岡天神店
+                                <a href="https://www.google.com/maps/search/?api=1&query=Blue+Bottle+Coffee+Fukuoka+Tenjin" target="_blank" class="map-btn">🗺️ 地圖</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <input type="checkbox" id="d4_12">
+                        <div class="item-content">
+                            <div class="item-title">
+                                <span class="badge badge-food">晚餐</span>藥院燒肉
+                                <a href="https://www.google.com/maps/search/?api=1&query=藥院燒肉" target="_blank" class="map-btn">🗺️ 地圖</a>
+                            </div>
+                            <div class="item-desc">需一個月前預約，備案：燒肉垂榕</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Day 5 -->
+        <div id="day5" class="day-panel">
+            <div class="card">
+                <div class="card-header">10/04 (日) Day 5：博多伴手禮 Day</div>
+                <ul class="item-list">
+                    <li class="item">
+                        <input type="checkbox" id="d5_1">
+                        <div class="item-content">
+                            <div class="item-title">
+                                <span class="badge badge-food">美食</span>黑毛和牛 博多牛まぶし 武藏
+                                <a href="https://www.google.com/maps/search/?api=1&query=博多牛まぶし+武蔵" target="_blank" class="map-btn">🗺️ 地圖</a>
+                            </div>
+                            <div class="item-desc">不接受預約，建議 11:30 前抵達</div>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <input type="checkbox" id="d5_2">
+                        <div class="item-content">
+                            <div class="item-title">
+                                <span class="badge badge-spot">景點</span>櫛田神社
+                                <a href="https://www.google.com/maps/search/?api=1&query=櫛田神社" target="_blank" class="map-btn">🗺️ 地圖</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <input type="checkbox" id="d5_3">
+                        <div class="item-content">
+                            <div class="item-title">
+                                <span class="badge badge-cafe">咖啡</span>FUK COFFEE
+                                <a href="https://www.google.com/maps/search/?api=1&query=FUK+COFFEE" target="_blank" class="map-btn">🗺️ 地圖</a>
+                            </div>
+                            <div class="item-desc">建議外帶，不要內用</div>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <input type="checkbox" id="d5_4">
+                        <div class="item-content">
+                            <div class="item-title">
+                                <span class="badge badge-shop">購物</span>博多巴士總站 5 樓
+                                <a href="https://www.google.com/maps/search/?api=1&query=博多巴士總站" target="_blank" class="map-btn">🗺️ 地圖</a>
+                            </div>
+                            <div class="item-desc">大創 DAISO、STANDARD PRODUCTS</div>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <input type="checkbox" id="d5_5">
+                        <div class="item-content">
+                            <div class="item-title">
+                                <span class="badge badge-shop">購物</span>博多車站超市
+                                <a href="https://www.google.com/maps/search/?api=1&query=博多車站超市" target="_blank" class="map-btn">🗺️ 地圖</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <input type="checkbox" id="d5_6">
+                        <div class="item-content">
+                            <div class="item-title">
+                                <span class="badge badge-food">點心</span>努努雞
+                                <a href="https://www.google.com/maps/search/?api=1&query=努努雞+博多" target="_blank" class="map-btn">🗺️ 地圖</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <input type="checkbox" id="d5_7">
+                        <div class="item-content">
+                            <div class="item-title"><span class="badge badge-food">點心</span>可麗露</div>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <input type="checkbox" id="d5_8">
+                        <div class="item-content">
+                            <div class="item-title"><span class="badge badge-food">點心</span>治一郎布丁</div>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <input type="checkbox" id="d5_9">
+                        <div class="item-content">
+                            <div class="item-title">
+                                <span class="badge badge-shop">購物</span>LOPIA 博多友都八喜店
+                                <a href="https://www.google.com/maps/search/?api=1&query=LOPIA+博多友都八喜店" target="_blank" class="map-btn">🗺️ 地圖</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <input type="checkbox" id="d5_10">
+                        <div class="item-content">
+                            <div class="item-title">
+                                <span class="badge badge-spot">景點</span>燕林廣場 屋上庭園
+                                <a href="https://www.google.com/maps/search/?api=1&query=燕の杜広場" target="_blank" class="map-btn">🗺️ 地圖</a>
+                            </div>
+                            <div class="item-desc">沒地方去可以去空檔休息</div>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <input type="checkbox" id="d5_11">
+                        <div class="item-content">
+                            <div class="item-title"><span class="badge badge-food">晚餐</span>博多晚餐（待定）</div>
+                            <div class="item-desc">備案：Shake Shack、天神葫蘆壽司</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript 邏輯控制 -->
+    <script>
+        // 切換天數按鈕邏輯
+        function switchDay(dayId) {
+            const panels = document.querySelectorAll('.day-panel');
+            panels.forEach(panel => panel.classList.remove('active'));
+
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            document.getElementById(dayId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+
+        // 自動儲存打勾狀態至瀏覽器 LocalStorage
+        document.addEventListener('DOMContentLoaded', () => {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            
+            checkboxes.forEach(box => {
+                const savedStatus = localStorage.getItem(box.id);
+                if (savedStatus === 'true') {
+                    box.checked = true;
+                }
+
+                box.addEventListener('change', (e) => {
+                    localStorage.setItem(e.target.id, e.target.checked);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
