@@ -153,23 +153,29 @@
             color: var(--text-main);
         }
 
-        /* 頂端搜尋控制卡片 */
+        /* --- 對外搜尋列控制卡片 --- */
         .control-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 8px;
-            padding: 10px 12px;
+            padding: 12px 14px;
             margin-bottom: 12px;
+        }
+
+        .search-input-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
         }
 
         .search-input {
             width: 100%;
-            padding: 8px 14px;
+            padding: 9px 14px;
             border: 1px solid var(--border-color);
             border-radius: 20px;
             background-color: var(--bg-color);
             color: var(--text-main);
-            font-size: 0.82rem;
+            font-size: 0.85rem;
             outline: none;
             transition: border-color 0.2s ease;
         }
@@ -177,6 +183,35 @@
         .search-input:focus {
             border-color: var(--primary-color);
             background-color: #FFFFFF;
+        }
+
+        .search-btn-group {
+            display: flex;
+            gap: 8px;
+        }
+
+        .search-action-btn {
+            flex: 1;
+            background-color: var(--primary-color);
+            color: var(--btn-text);
+            border: none;
+            padding: 7px 10px;
+            border-radius: 16px;
+            font-size: 0.78rem;
+            font-weight: 500;
+            cursor: pointer;
+            text-align: center;
+            transition: opacity 0.2s;
+        }
+
+        .search-action-btn:active {
+            opacity: 0.85;
+        }
+
+        .search-action-btn.secondary {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
         }
 
         /* 行李卡片內部的進度條樣式 */
@@ -489,9 +524,15 @@
             </div>
         </div>
 
-        <!-- 頂端搜尋控制卡片 -->
+        <!-- 對外搜尋條區塊 -->
         <div class="control-card">
-            <input type="text" id="search-input" class="search-input" placeholder="🔍 搜尋全站景點、美食、備案或行李..." oninput="filterItems()">
+            <div class="search-input-wrapper">
+                <input type="text" id="external-search-input" class="search-input" placeholder="🌐 輸入關鍵字，對外搜尋 Google / 地圖..." onkeydown="if(event.key==='Enter') searchExternal('google')">
+                <div class="search-btn-group">
+                    <button class="search-action-btn" onclick="searchExternal('google')">🔍 Google 搜尋</button>
+                    <button class="search-action-btn secondary" onclick="searchExternal('maps')">🗺️ 地圖搜尋</button>
+                </div>
+            </div>
         </div>
 
         <!-- 天數切換頁籤 -->
@@ -540,7 +581,6 @@
             <div class="card">
                 <div class="card-header">🎒 行李打包檢查清單</div>
                 
-                <!-- 行李打包進度條放置於此 -->
                 <div class="progress-box">
                     <div class="progress-header">
                         <span>🎒 行李打包完成度</span>
@@ -1289,92 +1329,38 @@
 
     <!-- JavaScript 邏輯控制 -->
     <script>
-        let currentActiveTab = 'prep'; // 記錄目前切換到的頁籤
-
         // 切換頁籤邏輯
         function switchDay(dayId) {
-            currentActiveTab = dayId;
-            
-            // 切換頁籤時清空搜尋框
-            const searchInput = document.getElementById('search-input');
-            if (searchInput) searchInput.value = '';
+            const panels = document.querySelectorAll('.day-panel');
+            panels.forEach(panel => panel.classList.remove('active'));
 
             const buttons = document.querySelectorAll('.tab-btn');
             buttons.forEach(btn => btn.classList.remove('active'));
 
+            document.getElementById(dayId).classList.add('active');
             if (event && event.currentTarget) {
                 event.currentTarget.classList.add('active');
             }
-
-            resetSearchVisibility();
         }
 
-        // 還原搜尋狀態顯示
-        function resetSearchVisibility() {
-            const items = document.querySelectorAll('.item');
-            items.forEach(item => item.style.display = 'flex');
+        // 對外搜尋（開啟 Google 搜尋或 Google 地圖）
+        function searchExternal(type) {
+            const input = document.getElementById('external-search-input');
+            const query = input ? input.value.trim() : '';
 
-            const groups = document.querySelectorAll('.item-group');
-            groups.forEach(group => group.style.display = 'block');
-
-            const cards = document.querySelectorAll('.card');
-            cards.forEach(card => card.style.display = 'block');
-
-            const panels = document.querySelectorAll('.day-panel');
-            panels.forEach(panel => {
-                if (panel.id === currentActiveTab) {
-                    panel.style.display = 'block';
-                    panel.classList.add('active');
-                } else {
-                    panel.style.display = 'none';
-                    panel.classList.remove('active');
-                }
-            });
-        }
-
-        // 升級版跨全站搜尋過濾演算法
-        function filterItems() {
-            const query = document.getElementById('search-input').value.toLowerCase().trim();
-
-            if (query === '') {
-                resetSearchVisibility();
+            if (!query) {
+                alert('請先輸入要搜尋的關鍵字喔！');
                 return;
             }
 
-            // 搜尋時臨時展現所有面板
-            const panels = document.querySelectorAll('.day-panel');
-            panels.forEach(panel => panel.style.display = 'block');
+            let searchUrl = '';
+            if (type === 'maps') {
+                searchUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+            } else {
+                searchUrl = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+            }
 
-            // 1. 比對項目
-            const items = document.querySelectorAll('.item');
-            items.forEach(item => {
-                const text = item.innerText.toLowerCase();
-                if (text.includes(query)) {
-                    item.style.display = 'flex';
-                } else {
-                    item.style.display = 'none';
-                }
-            });
-
-            // 2. 比對子分類區塊 (item-group)
-            const groups = document.querySelectorAll('.item-group');
-            groups.forEach(group => {
-                const visibleItems = group.querySelectorAll('.item[style*="display: flex"]');
-                group.style.display = visibleItems.length > 0 ? 'block' : 'none';
-            });
-
-            // 3. 比對卡片區塊 (card)
-            const cards = document.querySelectorAll('.card');
-            cards.forEach(card => {
-                const visibleItems = card.querySelectorAll('.item[style*="display: flex"]');
-                card.style.display = visibleItems.length > 0 ? 'block' : 'none';
-            });
-
-            // 4. 比對天數面板 (day-panel)
-            panels.forEach(panel => {
-                const visibleCards = panel.querySelectorAll('.card[style*="display: block"]');
-                panel.style.display = visibleCards.length > 0 ? 'block' : 'none';
-            });
+            window.open(searchUrl, '_blank');
         }
 
         // 專門計算 #prep 區塊內的行李打包進度
@@ -1393,6 +1379,7 @@
             if (textElement) textElement.innerText = `打包進度：${percent}% (${count}/${total})`;
         }
 
+        // WMO 天氣代碼對照表
         function getWeatherDescription(code) {
             const codes = {
                 0: '晴朗 ☀️',
@@ -1415,6 +1402,7 @@
             return codes[code] || '多雲 ⛅';
         }
 
+        // 即時抓取 Open-Meteo 福岡天氣數據
         async function fetchLiveWeather() {
             try {
                 const url = 'https://api.open-meteo.com/v1/forecast?latitude=33.5902&longitude=130.4017&current_weather=true&daily=temperature_2m_max,temperature_2m_min&timezone=Asia%2FTokyo';
