@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>福岡 6 天 5 夜自由行</title>
+
+    <!-- 社群分享 (LINE/FB) 卡片預覽設定 -->
+    <meta property="og:title" content="🇯🇵 福岡 6 天 5 夜自由行" />
+    <meta property="og:description" content="📅 2026/09/30 (三) ～ 10/05 (一) | 航班速查、景點地圖與行李清單" />
+    <meta property="og:type" content="website" />
+
     <style>
         :root {
             --primary-color: #3a6b88;
@@ -46,7 +52,6 @@
             padding: 12px;
         }
 
-        /* 快捷按鈕與卡片 */
         .info-card {
             background: #ffffff;
             border-radius: 12px;
@@ -120,7 +125,6 @@
 
         .hotel-detail strong { color: var(--primary-color); }
 
-        /* 天氣卡片樣式 */
         .weather-box {
             background-color: #eef7fc;
             border-radius: 8px;
@@ -139,7 +143,6 @@
             margin-bottom: 6px;
         }
 
-        /* 頁籤控制 */
         .tab-container {
             display: flex;
             overflow-x: auto;
@@ -196,7 +199,6 @@
             margin-bottom: 10px;
         }
 
-        /* 行程清單 */
         .item-list { list-style: none; padding: 0; margin: 0; }
 
         .item {
@@ -229,7 +231,6 @@
 
         .item-desc { font-size: 0.82rem; color: #666; margin-top: 2px; }
 
-        /* --- 大分類與小分類 (階層樣式) --- */
         .item-group {
             margin-bottom: 16px;
             background: #fafafa;
@@ -265,7 +266,6 @@
             border-bottom: none;
         }
 
-        /* 備案選項列表樣式 */
         .backup-option {
             display: flex;
             align-items: center;
@@ -275,7 +275,6 @@
             color: #555;
         }
 
-        /* 標籤 Badge */
         .badge {
             display: inline-block;
             padding: 2px 6px;
@@ -315,7 +314,6 @@
 
     <div class="container">
 
-        <!-- Visit Japan Web 官方連結 Banner -->
         <div class="vjw-banner">
             <div>
                 <strong>Visit Japan Web</strong>
@@ -324,7 +322,6 @@
             <a href="https://services.digital.go.jp/zh-cmn-hant/visit-japan-web/" target="_blank" class="vjw-link-btn">開啟官網 ↗</a>
         </div>
 
-        <!-- 航班與住宿速查卡片 -->
         <div class="info-card">
             <h3>✈️ 航班資訊速查</h3>
             <table class="flight-table">
@@ -365,7 +362,6 @@
             </div>
         </div>
 
-        <!-- 天數切換頁籤 -->
         <div class="tab-container">
             <button class="tab-btn active" onclick="switchDay('prep')">🧳 行前準備與天氣</button>
             <button class="tab-btn" onclick="switchDay('day1')">Day 1 (9/30)</button>
@@ -376,9 +372,7 @@
             <button class="tab-btn" onclick="switchDay('day6')">Day 6 (10/5)</button>
         </div>
 
-        <!-- 🧳 行前準備與天氣面板 -->
         <div id="prep" class="day-panel active">
-            <!-- 天氣預報卡片 -->
             <div class="card">
                 <div class="card-header">☀️ 福岡當地天氣與穿搭建議</div>
                 <div class="weather-box">
@@ -391,12 +385,10 @@
                 </div>
             </div>
 
-            <!-- 出國旅行行李確認清單 (階層式：大分類 ➔ 小分類) -->
             <div class="card">
                 <div class="card-header">🎒 行李打包檢查清單</div>
                 <div class="note-box">💡 勾選狀態會自動存於手機中，打包時邊看邊勾不漏接！</div>
                 
-                <!-- 大分類 1：重要證件與金流 -->
                 <div class="item-group">
                     <div class="group-title">📄 重要證件與金流</div>
                     <ul class="sub-item-list">
@@ -427,7 +419,6 @@
                     </ul>
                 </div>
 
-                <!-- 大分類 2：衣物與穿搭 -->
                 <div class="item-group">
                     <div class="group-title">👔 衣物與穿搭</div>
                     <ul class="sub-item-list">
@@ -466,7 +457,6 @@
                     </ul>
                 </div>
 
-                <!-- 大分類 3：電器與 3C 通訊 -->
                 <div class="item-group">
                     <div class="group-title">🔌 電器與 3C 通訊</div>
                     <ul class="sub-item-list">
@@ -497,7 +487,6 @@
                     </ul>
                 </div>
 
-                <!-- 大分類 4：藥品與個人保養 -->
                 <div class="item-group">
                     <div class="group-title">💊 藥品與個人保養</div>
                     <ul class="sub-item-list">
@@ -524,7 +513,6 @@
                     </ul>
                 </div>
 
-                <!-- 大分類 5：生活與季節備品 -->
                 <div class="item-group">
                     <div class="group-title">☂️ 生活與季節備品</div>
                     <ul class="sub-item-list">
@@ -554,7 +542,6 @@
             </div>
         </div>
 
-        <!-- Day 1 -->
         <div id="day1" class="day-panel">
             <div class="card">
                 <div class="card-header">09/30 (三) Day 1：出發與博多車站周邊</div>
@@ -662,7 +649,6 @@
             </div>
         </div>
 
-        <!-- Day 2 -->
         <div id="day2" class="day-panel">
             <div class="card">
                 <div class="card-header">10/01 (四) Day 2：糸島一日遊</div>
@@ -740,7 +726,6 @@
             </div>
         </div>
 
-        <!-- Day 3 -->
         <div id="day3" class="day-panel">
             <div class="card">
                 <div class="card-header">10/02 (五) Day 3：太宰府</div>
@@ -853,7 +838,6 @@
             </div>
         </div>
 
-        <!-- Day 4 -->
         <div id="day4" class="day-panel">
             <div class="card">
                 <div class="card-header">10/03 (六) Day 4：天神周邊</div>
@@ -978,7 +962,6 @@
             </div>
         </div>
 
-        <!-- Day 5 -->
         <div id="day5" class="day-panel">
             <div class="card">
                 <div class="card-header">10/04 (日) Day 5：博多伴手禮 Day</div>
@@ -1099,7 +1082,6 @@
             </div>
         </div>
 
-        <!-- Day 6 -->
         <div id="day6" class="day-panel">
             <div class="card">
                 <div class="card-header">10/05 (一) Day 6：福岡機場 ➔ 桃園機場</div>
@@ -1141,7 +1123,6 @@
 
     </div>
 
-    <!-- JavaScript 邏輯控制 -->
     <script>
         function switchDay(dayId) {
             const panels = document.querySelectorAll('.day-panel');
