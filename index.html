@@ -183,6 +183,16 @@
 
         .item-desc { font-size: 0.82rem; color: #666; margin-top: 2px; }
 
+        /* 備案選項列表樣式 */
+        .backup-option {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 4px;
+            padding: 2px 0;
+            color: #555;
+        }
+
         /* 標籤 Badge */
         .badge {
             display: inline-block;
@@ -419,7 +429,13 @@
                                 <span class="badge badge-cafe">咖啡</span>Beach Cafe SUNSET
                                 <a href="https://www.google.com/maps/search/?api=1&query=Beach+Cafe+SUNSET+糸島" target="_blank" class="map-btn">🗺️ 地圖</a>
                             </div>
-                            <div class="item-desc">備案：SURF SIDE CAFE Palm Beach Gardens</div>
+                            <!-- 新增：Beach Cafe SUNSET 備案地圖 -->
+                            <div class="item-desc">
+                                <div class="backup-option">
+                                    <span>☕ 備案：SURF SIDE CAFE Palm Beach Gardens</span>
+                                    <a href="https://www.google.com/maps/search/?api=1&query=SURF+SIDE+CAFE+Palm+Beach+Gardens" target="_blank" class="map-btn">🗺️ 地圖</a>
+                                </div>
+                            </div>
                         </div>
                     </li>
                     <li class="item">
@@ -434,8 +450,17 @@
                     <li class="item">
                         <input type="checkbox" id="d2_6">
                         <div class="item-content">
-                            <div class="item-title"><span class="badge badge-food">晚餐</span>博多晚餐（待定）</div>
-                            <div class="item-desc">備案：Shake Shack、天神葫蘆壽司</div>
+                            <div class="item-title"><span class="badge badge-food">晚餐</span>博多晚餐（待定備案）</div>
+                            <div class="item-desc">
+                                <div class="backup-option">
+                                    <span>🍔 Shake Shack 博多店</span>
+                                    <a href="https://www.google.com/maps/search/?api=1&query=Shake+Shack+博多店" target="_blank" class="map-btn">🗺️ 地圖</a>
+                                </div>
+                                <div class="backup-option">
+                                    <span>🍣 天神葫蘆壽司</span>
+                                    <a href="https://www.google.com/maps/search/?api=1&query=天神葫蘆壽司" target="_blank" class="map-btn">🗺️ 地圖</a>
+                                </div>
+                            </div>
                         </div>
                     </li>
                 </ul>
@@ -500,7 +525,13 @@
                                 <span class="badge badge-food">點心</span>かさの家 梅枝餅
                                 <a href="https://www.google.com/maps/search/?api=1&query=かさの家+太宰府" target="_blank" class="map-btn">🗺️ 地圖</a>
                             </div>
-                            <div class="item-desc">備案：武安</div>
+                            <!-- 新增：かさの家 備案（武安）地圖 -->
+                            <div class="item-desc">
+                                <div class="backup-option">
+                                    <span>🥧 備案：武安</span>
+                                    <a href="https://www.google.com/maps/search/?api=1&query=太宰府+武安" target="_blank" class="map-btn">🗺️ 地圖</a>
+                                </div>
+                            </div>
                         </div>
                     </li>
                     <li class="item">
@@ -533,15 +564,24 @@
                     <li class="item">
                         <input type="checkbox" id="d3_10">
                         <div class="item-content">
-                            <div class="item-title"><span class="badge badge-food">晚餐</span>博多晚餐（待定）</div>
-                            <div class="item-desc">備案：Shake Shack、天神葫蘆壽司</div>
+                            <div class="item-title"><span class="badge badge-food">晚餐</span>博多晚餐（待定備案）</div>
+                            <div class="item-desc">
+                                <div class="backup-option">
+                                    <span>🍔 Shake Shack 博多店</span>
+                                    <a href="https://www.google.com/maps/search/?api=1&query=Shake+Shack+博多店" target="_blank" class="map-btn">🗺️ 地圖</a>
+                                </div>
+                                <div class="backup-option">
+                                    <span>🍣 天神葫蘆壽司</span>
+                                    <a href="https://www.google.com/maps/search/?api=1&query=天神葫蘆壽司" target="_blank" class="map-btn">🗺️ 地圖</a>
+                                </div>
+                            </div>
                         </div>
                     </li>
                 </ul>
             </div>
         </div>
 
-        <!-- Day 4 (恢復為乾淨的原始 Day 4 行程) -->
+        <!-- Day 4 -->
         <div id="day4" class="day-panel">
             <div class="card">
                 <div class="card-header">10/03 (六) Day 4：天神周邊</div>
@@ -653,14 +693,21 @@
                                 <span class="badge badge-food">晚餐</span>藥院燒肉
                                 <a href="https://www.google.com/maps/search/?api=1&query=藥院燒肉" target="_blank" class="map-btn">🗺️ 地圖</a>
                             </div>
-                            <div class="item-desc">需一個月前預約，備案：燒肉垂榕</div>
+                            <div class="item-desc">需一個月前預約</div>
+                            <!-- 新增：藥院燒肉 備案（燒肉垂榕）地圖 -->
+                            <div class="item-desc">
+                                <div class="backup-option">
+                                    <span>🥩 備案：燒肉垂榕</span>
+                                    <a href="https://www.google.com/maps/search/?api=1&query=燒肉垂榕" target="_blank" class="map-btn">🗺️ 地圖</a>
+                                </div>
+                            </div>
                         </div>
                     </li>
                 </ul>
             </div>
         </div>
 
-        <!-- Day 5 (包含正確更新的 LeClerc 可麗露與治一郎 + 地圖按鈕) -->
+        <!-- Day 5 -->
         <div id="day5" class="day-panel">
             <div class="card">
                 <div class="card-header">10/04 (日) Day 5：博多伴手禮 Day</div>
@@ -722,7 +769,6 @@
                             </div>
                         </div>
                     </li>
-                    <!-- 正確放入 Day 5：LeClerc 可麗露與地圖 -->
                     <li class="item">
                         <input type="checkbox" id="d5_7">
                         <div class="item-content">
@@ -733,7 +779,6 @@
                             <div class="item-desc">AMU Plaza 博多 B1F 櫃位</div>
                         </div>
                     </li>
-                    <!-- 正確放入 Day 5：治一郎與地圖 -->
                     <li class="item">
                         <input type="checkbox" id="d5_8">
                         <div class="item-content">
@@ -766,8 +811,17 @@
                     <li class="item">
                         <input type="checkbox" id="d5_11">
                         <div class="item-content">
-                            <div class="item-title"><span class="badge badge-food">晚餐</span>博多晚餐（待定）</div>
-                            <div class="item-desc">備案：Shake Shack、天神葫蘆壽司</div>
+                            <div class="item-title"><span class="badge badge-food">晚餐</span>博多晚餐（待定備案）</div>
+                            <div class="item-desc">
+                                <div class="backup-option">
+                                    <span>🍔 Shake Shack 博多店</span>
+                                    <a href="https://www.google.com/maps/search/?api=1&query=Shake+Shack+博多店" target="_blank" class="map-btn">🗺️ 地圖</a>
+                                </div>
+                                <div class="backup-option">
+                                    <span>🍣 天神葫蘆壽司</span>
+                                    <a href="https://www.google.com/maps/search/?api=1&query=天神葫蘆壽司" target="_blank" class="map-btn">🗺️ 地圖</a>
+                                </div>
+                            </div>
                         </div>
                     </li>
                 </ul>
