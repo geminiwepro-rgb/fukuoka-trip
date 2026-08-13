@@ -7,7 +7,7 @@
 
     <!-- 社群分享 (LINE/FB) 卡片預覽設定 -->
     <meta property="og:title" content="🇯🇵 福岡 6 天 5 夜自由行" />
-    <meta property="og:description" content="📅 2026/09/30 (三) ～ 10/05 (一) | 航班速查、景點地圖與即時天氣" />
+    <meta property="og:description" content="📅 2026/09/30 (三) ～ 10/05 (一) | 航班速查、景點地圖與行李打包清單" />
     <meta property="og:type" content="website" />
 
     <style>
@@ -153,6 +153,59 @@
             color: var(--text-main);
         }
 
+        /* 進度條與搜尋控制卡片 */
+        .control-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px 14px;
+            margin-bottom: 12px;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.82rem;
+            color: var(--text-main);
+            font-weight: 500;
+            margin-bottom: 6px;
+        }
+
+        .progress-track {
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            height: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 12px;
+        }
+
+        .progress-fill {
+            background-color: var(--primary-color);
+            height: 100%;
+            width: 0%;
+            border-radius: 5px;
+            transition: width 0.3s ease;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 8px 14px;
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-size: 0.82rem;
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        .search-input:focus {
+            border-color: var(--primary-color);
+            background-color: #FFFFFF;
+        }
+
         .tab-container {
             display: flex;
             overflow-x: auto;
@@ -213,7 +266,6 @@
             margin-bottom: 10px;
         }
 
-        /* --- 新增：無印風格即時天氣嵌入樣式 --- */
         .weather-display-card {
             background-color: var(--bg-color);
             border: 1px solid var(--border-color);
@@ -428,6 +480,18 @@
             </div>
         </div>
 
+        <!-- 控制區塊：專屬行李打包進度條與即時搜尋欄 -->
+        <div class="control-card">
+            <div class="progress-header">
+                <span>🎒 行李打包進度</span>
+                <span id="progress-text">打包進度：0% (0/0)</span>
+            </div>
+            <div class="progress-track">
+                <div id="progress-fill" class="progress-fill"></div>
+            </div>
+            <input type="text" id="search-input" class="search-input" placeholder="🔍 搜尋景點、美食或備案..." oninput="filterItems()">
+        </div>
+
         <!-- 天數切換頁籤 -->
         <div class="tab-container">
             <button class="tab-btn active" onclick="switchDay('prep')">🧳 行前準備與天氣</button>
@@ -441,7 +505,6 @@
 
         <!-- 🧳 行前準備與天氣面板 -->
         <div id="prep" class="day-panel active">
-            <!-- 直接嵌入即時天氣數據卡片 -->
             <div class="card">
                 <div class="card-header">☀️ 福岡市即時氣候與穿搭建議</div>
                 
@@ -467,11 +530,10 @@
                 </div>
 
                 <div class="note-box">
-                    🧥 <strong>秋季穿搭建議</strong>：秋季（9月底-10月初）平均氣溫約 18°C ~ 25°C。白天舒適宜人，早晚偏涼，建議採用洋蔥式穿搭並隨身攜帶薄外套防風。
+                    抓穿搭建議：秋季（9月底-10月初）平均氣溫約 18°C ~ 25°C。白天舒適宜人，早晚偏涼，建議採用洋蔥式穿搭並隨身攜帶薄外套防風。
                 </div>
             </div>
 
-            <!-- 出國旅行行李確認清單 -->
             <div class="card">
                 <div class="card-header">🎒 行李打包檢查清單</div>
                 <div class="note-box">💡 勾選狀態會自動存於手機中，打包時邊看邊勾不漏接！</div>
@@ -1212,7 +1274,6 @@
 
     <!-- JavaScript 邏輯控制 -->
     <script>
-        // 切換頁籤邏輯
         function switchDay(dayId) {
             const panels = document.querySelectorAll('.day-panel');
             panels.forEach(panel => panel.classList.remove('active'));
@@ -1224,7 +1285,36 @@
             event.currentTarget.classList.add('active');
         }
 
-        // WMO 天氣代碼對照表
+        // 修改點：專門計算 #prep 區塊內的行李打包進度
+        function updateProgress() {
+            const prepBoxes = document.querySelectorAll('#prep input[type="checkbox"]');
+            const checkedPrepBoxes = document.querySelectorAll('#prep input[type="checkbox"]:checked');
+            
+            const total = prepBoxes.length;
+            const count = checkedPrepBoxes.length;
+            const percent = total > 0 ? Math.round((count / total) * 100) : 0;
+
+            const fillElement = document.getElementById('progress-fill');
+            const textElement = document.getElementById('progress-text');
+
+            if (fillElement) fillElement.style.width = percent + '%';
+            if (textElement) textElement.innerText = `打包進度：${percent}% (${count}/${total})`;
+        }
+
+        function filterItems() {
+            const query = document.getElementById('search-input').value.toLowerCase().trim();
+            const items = document.querySelectorAll('.item');
+
+            items.forEach(item => {
+                const text = item.innerText.toLowerCase();
+                if (query === '' || text.includes(query)) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
         function getWeatherDescription(code) {
             const codes = {
                 0: '晴朗 ☀️',
@@ -1247,10 +1337,8 @@
             return codes[code] || '多雲 ⛅';
         }
 
-        // 即時抓取 Open-Meteo 福岡天氣數據
         async function fetchLiveWeather() {
             try {
-                // 福岡市經緯度: Lat 33.5902, Lon 130.4017
                 const url = 'https://api.open-meteo.com/v1/forecast?latitude=33.5902&longitude=130.4017&current_weather=true&daily=temperature_2m_max,temperature_2m_min&timezone=Asia%2FTokyo';
                 const response = await fetch(url);
                 const data = await response.json();
@@ -1273,7 +1361,6 @@
             }
         }
 
-        // 頁面載入後自動恢復勾選狀態並讀取天氣
         document.addEventListener('DOMContentLoaded', () => {
             fetchLiveWeather();
 
@@ -1286,8 +1373,11 @@
 
                 box.addEventListener('change', (e) => {
                     localStorage.setItem(e.target.id, e.target.checked);
+                    updateProgress();
                 });
             });
+
+            updateProgress();
         });
     </script>
 </body>
